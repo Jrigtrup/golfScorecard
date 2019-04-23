@@ -2,29 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>golfScorecard.html</title>
+    <title>golfScorecard.html</title>  
+    <script src="random.js" defer></script>
     <script src="golfScorecard.js" defer></script>
-    <link href="golfScorecard.css" rel="stylesheet">  
+    <link href="golfScorecard.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>  
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+
+    
 </head>
+<style>
+
+</style>
 
 <body>
-
-    <div class="container">
-        <img class="img" src="GOLF.jpg">
-
-        <div class="playerbox">
-    
-            <div class="namerow">Jonathan Rigtrup</div>
-            <div class="namerow">Jordan Tueller</div>
-            <div class="namerow">Parker Jacobsen</div>
-            <div class="namerow">Trent Ross</div>
-    
-        </div>
-        <div class="card"></div>
+    <div class="course-container">
+        <select id="courseSelect" onchange='returnCourse(this.value)'>
+            <option value=''>Select Course</option>
+        </select>
     </div>
+
+        <img src="image.png">
+
+<div class="container">
+    <div class="leftcard">
+        <div class="playerbox"></div>
+        <input id="playerName" type='text' class="playerinput" onkeyup="addPlayer(this.value, event)">
+    </div>
+    <div class="score"></div>
+</div>
+
 
 
 </body>
