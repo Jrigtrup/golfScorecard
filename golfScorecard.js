@@ -1,10 +1,11 @@
 
-let numplayers = 2;
+let numplayers = 0;
 let numholes = 9;
 let selcourse;
 let seltype;
 let courses = [];
 let teeboxes = [];
+let selectedTeebox;
 
 loadCard();
 placePlayers();
@@ -14,51 +15,43 @@ function loadCard() {
         playgen.add(p, undefined);
     }
     buildCard();
-    buildCard2();
 }
 
 function placePlayers() {
-    $(".playerbox").html("");
+    $(".playerbox").html("Enter name below...");
     for (let p = 0; p < playgen.playerCollection.length; p++) {
         $(".playerbox").append(`<div>
-        <a href="#" onclick="deletePlayer(${playgen.playerCollection[p].id})">-</a>
+        <a href="#" onclick="deletePlayer(${playgen.playerCollection[p].id})">Remove___</a>           
         <span>${playgen.playerCollection[p].name}</span></div>`);
     }
 
 }
 
 function buildCard() {
-
-    for (let c = 0; c < 9; c++) {
-        $('.score').append(`<div id='c${c}' class='colm'><span>${c + 1}</span></div>`);
-    }
-    $('.score').append(`<div id='out' class='colm'><span>out</span></div>`);
-
-    for (let p = 0; p < 4; p++) {
-
-        for (let h = 0; h < 9; h++) {
-            $(`#c${h}`).append(`<input onkeyup='updatescore(${p})' type='text' id="p${p}h${h}" class='hole'></div>`);
-        }
-        $('#out').append(`<div id='o${p}' class='hole'></div>`);
+  $('.score').append(`<div class='holes'></div>`)
+  $('.score').append(`<div class='pars'></div>`)
+  $('.score').append(`<div class='distances'></div>`)
+  $('.holes').append(`<div id='title' class='colm'><span>Hole #</span></div>`);
+  $('.pars').append(`<div id='title' class='colm'><span>Par</span></div>`);
+  $('.distances').append(`<div id='title' class='colm'><span>Distance</span></div>`);
+    for (let c = 0; c < 18; c++) {     
+      $('.holes').append(`<div id='holes-${c}' class='colm'><span>${c+1}</span></div>`);  
+      $('.pars').append(`<div id='pars-${c}' class='colm'><span></span></div>`);
+      $('.distances').append(`<div id='distances-${c}' class='colm'><span></span></div>`);
     }
 }
 
-function buildCard2() {
-
-    for (let c = 0; c < 9; c++) {
-        $('.score').append(`<div id='c${c}' class='colm'><span>${c + 1}</span></div>`);
-    }
-    $('.score').append(`<div id='out' class='colm'><span>in</span></div>`);
-
-    for (let p = 0; p < 4; p++) {
-
-        for (let h = 0; h < 9; h++) {
-            $(`#c${h}`).append(`<input onkeyup='updatescore(${p})' type='text' id="p${p}h${h}" class='hole'></div>`);
-        }
-        $('#out').append(`<div id='o${p}' class='hole'></div>`);
-    }
+function fillData(teeBox) {
+  console.log($('#teeboxSelect').val());
+  let teeTypeId = $('#teeboxSelect').val()-1;
+  selcourse.holes.forEach((hole, index) => {
+    let par = hole.teeBoxes[teeTypeId].par;
+    console.log(par);
+    $(`#pars-${index}`).html(par);
+    let yards = hole.teeBoxes[teeTypeId].yards;
+    $(`#distances-${index}`).html(yards);
+  });
 }
-
 
 function updatescore(playerid) {
     let total = 0;
@@ -106,21 +99,27 @@ function getCourses() {
 }
 
 function returnCourse(courseid) {
-    // let thecard = $(mybtn).parent();
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             selcourse = JSON.parse(this.responseText).data;
             console.log(selcourse);
-            // let levelsArray = selcourse.classes[0].levels;
-            // console.log(levelsArray);
-            // for (let i = 0; i < levelsArray.length; i++) {
-            //     $(thecard).append(`<a onclick="showAllClasses(${i})">${levelsArray[i].type}</a>`);
-            // }
+            teeboxes = selcourse.holes[0].teeBoxes;
+            console.log(teeboxes);
+            displayTeeboxes(teeboxes);
         }
     };
     xhttp.open("GET", `https://golf-courses-api.herokuapp.com/courses/${courseid}`, true);
     xhttp.send();
+}
+
+function displayTeeboxes(tempTeeboxes) {
+  $('#teeboxSelect').remove()
+  $('.course-container').append(`<select id="teeboxSelect" onchange="fillData()">
+  <option value=''>Select Difficulty</option></select>`);
+  tempTeeboxes.forEach(teeBox => {
+    $('#teeboxSelect').append(`<option value="${teeBox.teeTypeId}">${teeBox.teeType}</option>`);
+  });
 }
 
 function showAllClasses(typeindex) {
