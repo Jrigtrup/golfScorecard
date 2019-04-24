@@ -6,6 +6,18 @@ body{
     margin-bottom: auto;
 
 }
+#courseSelect{
+    border: 3px solid rgb(89, 174, 253);
+    border-radius: 4px;
+    width: 30%;
+}
+.course-container{
+    position: relative;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: auto;
+    margin-bottom: auto;
+}
 .container{
     display: flex;
     position: absolute;
@@ -17,13 +29,15 @@ body{
 }
 .score{
     display: flex;
+    flex-direction: column;
     padding: 3px;
 }
 .colm{
     width: 30px;
     align-items: center;
     width: 30px;
-    min-height: 60px;
+    min-height: 10px;
+    text-align: center;
     border: 1px solid black;
     flex-direction: column;
 }
@@ -35,4 +49,10 @@ body{
 .classdisp{
     margin-left: 25px;
     margin-top: 25px;
+}
+#title{
+    width: 75px;
+}
+.holes, .pars, .distances{
+    display: flex;
 }
