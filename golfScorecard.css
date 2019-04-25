@@ -4,7 +4,6 @@ body{
     margin-left: auto;
     margin-right: auto;
     margin-bottom: auto;
-
 }
 #courseSelect{
     border: 3px solid rgb(89, 174, 253);
@@ -33,9 +32,8 @@ body{
     padding: 3px;
 }
 .colm{
-    width: 30px;
     align-items: center;
-    width: 30px;
+    width: 35px;
     min-height: 10px;
     text-align: center;
     border: 1px solid black;
@@ -61,4 +59,7 @@ input{
 }
 #playerName{
     min-width: 100px;
+}
+#foot{
+    grid-row-end: -1;
 }

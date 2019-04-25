@@ -38,22 +38,28 @@ function buildCard() {
   $('.score').append(`<div class='distances'></div>`)
   $('.score').append(`<div class='handicap'></div>`)
   $('.holes').append(`<div id='title' class='colm'><span>Hole #</span></div>`);
+
   $('.pars').append(`<div id='title' class='colm'><span>Par</span></div>`);
   $('.distances').append(`<div id='title' class='colm'><span>Distance</span></div>`);
   $('.handicap').append(`<div id='title' class='colm'><span>Handicap</span></div>`);
   for (let c = 0; c < 18; c++) {
-    //put in titles
     $('.holes').append(`<div id='holes-${c}' class='colm'><span>${c + 1}</span></div>`);
     $('.pars').append(`<div id='pars-${c}' class='colm'><span></span></div>`);
     $('.distances').append(`<div id='distances-${c}' class='colm'><span></span></div>`);
     $('.handicap').append(`<div id='handicap-${c}' class='colm'><span></span></div>`);
   }
+  $('.holes').append(`<div id='foot' class='colm'><span>Out</span></div>`);
+  $('.holes').append(`<div id='foot' class='colm'><span>In</span></div>`);
+  $('.holes').append(`<div id='foot' class='colm'><span>Total</span></div>`);
   $('.pars').append(`<div id='pars-in' class='colm'></div>`);
   $('.pars').append(`<div id='pars-out' class='colm'></div>`);
   $('.pars').append(`<div id='pars-total' class='colm'></div>`);
   $('.distances').append(`<div id='distances-in' class='colm'></div>`);
   $('.distances').append(`<div id='distances-out' class='colm'></div>`);
   $('.distances').append(`<div id='distances-total' class='colm'></div>`);
+  $('.handicap').append(`<div id='handicap-in' class='colm'></div>`);
+  $('.handicap').append(`<div id='handicap-out' class='colm'></div>`);
+  $('.handicap').append(`<div id='handicap-total' class='colm'></div>`);
 }
 
 function fillData(teeBox) {
