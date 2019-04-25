@@ -53,6 +53,12 @@ body{
 #title{
     width: 75px;
 }
-.holes, .pars, .distances{
+.holes, .pars, .distances, .handicap, div[class*="player-"] {
     display: flex;
+}
+input{
+    max-width: 23px;
+}
+#playerName{
+    min-width: 100px;
 }
