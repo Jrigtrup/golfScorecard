@@ -5,10 +5,11 @@ class PlayerGenerator{
         this.playerCollection = [];
         this.myarray = [0];
         this.nameArray = [""];
+        this.count = 0;
     }
-
     add(id, name){
         let myname;
+        this.count ++;
         let randum = Math.floor(Math.random() * this.nameArray.length);
         if(name === undefined){
             myname = this.nameArray[randum];
@@ -28,7 +29,6 @@ class PlayerGenerator{
     }
 
 }
-
 class Player{
     constructor(id, name, scores) {
         this.scoreArray = scores;
